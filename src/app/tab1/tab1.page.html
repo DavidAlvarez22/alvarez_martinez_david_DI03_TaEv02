@@ -1,17 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header-tab></app-header-tab><!--Introducimos nuestro componente header-->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content>
+
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-segment (ionChange)="segmentChanged($event)" scrollable value = "GENERAL">
+      <ion-segment-button value="GENERAL">
+        <ion-label>GENERAL</ion-label> 
+      </ion-segment-button>
+      <ion-segment-button value="BUSINESS">
+        <ion-label>BUSINESS</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="TECHNOLOGY">
+        <ion-label>TECNOLOGY</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="SCIENCE">
+        <ion-label>SCIENCE</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="SPORTS">
+        <ion-label>SPORTS</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  
+  <!--Creamos nuestra lista y a través de ngFor crearemos un bucle que recorrerá nuestro array de noticias. 
+    Para obtener el array de noticias, llamaremos a la función getDatosArchivo de nuestro servicio
+  <ion-list *ngFor = "let articulo of gestionDatos.getDatosArchivo()">-->
+    
+    <ion-list *ngFor="let articulo of gestionDatos.getDatosArchivo()">
+    <!--Cada elemento de la lista será un item-->
+    <ion-item >             
+      <ion-label>
+        <!--Obtenemos el nombre y el título de la noticia-->
+        <div style ="color:blue">{{articulo.source.name }}</div>
+        <div style ="color:grey">{{articulo.title}} </div> 
+      </ion-label>
+      <!--Utilizamos la etiqueta checkbox para crear los checkbox. Dentro tenemos los atributos slot, para ubicar el checkbox y la función ionchange que nos dirá que cuando cambie el estado del checbox de clickado a no
+      clickado y viceversa, llamará a la función de tab1.page.ts actualizarCheck a la que la pasará el evento del cambio y el titulo de la noticia-->
+      <ion-checkbox  [checked]= "cambiarCheck(articulo)" slot="start" (ionChange) = "actualizarCheck($event , articulo)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
 </ion-content>
