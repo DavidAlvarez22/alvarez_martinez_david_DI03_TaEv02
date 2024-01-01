@@ -28,14 +28,14 @@ export class GestionNoticiasService {
     this.getLeerFichero(this.tipoArticulo);
     
     
-   /* let datosPromesa : Promise <Article[]> = gestionAlmacen.getObject("arraySegundaPagina");
+   let datosPromesa : Promise <Article[]> = gestionAlmacen.getObject("arraySegundaPagina");
     datosPromesa.then( datos => {
       this.arraySegundaPagina = datos;
     })
     let datosPromesa2 : Promise <RootObject> = gestionAlmacen.getObject("todoFichero");
     datosPromesa2.then( datos => {
       this.todoFichero = datos;
-    })*/
+    })
 
    }
 
@@ -153,7 +153,7 @@ datosFichero.subscribe(datos =>{
           this.arraySegundaPagina.push(this.todoFichero.articles[indice]);
 
           //actualizamos mediante setObject nuestro array en el storage
-          //this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
+          this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
         }
     }
   }   
@@ -178,7 +178,7 @@ datosFichero.subscribe(datos =>{
       this.arraySegundaPagina.splice(indice,1);
 
       //actualizamos mediante setObject nuestro array en el storage
-     // this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
+      this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
      
     }
     }
