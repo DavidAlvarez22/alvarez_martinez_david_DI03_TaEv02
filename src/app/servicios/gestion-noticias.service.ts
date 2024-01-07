@@ -39,7 +39,7 @@ export class GestionNoticiasService {
 
    }
 
-   // Método getLeerFichero().No recibe ninguna variable ni devuelve nada. Pero sirve para dotar de contenido a nuestro objeto RootObject. 
+   // Método getLeerFichero().Recibe el tipo de artículo y en función del mismo llama a un listado u otro. 
   getLeerFichero(tipoArticulo : any){
    
     //Definimos el objeto datosFichero que será un objeto de Observable de la clase RootObject
@@ -55,7 +55,7 @@ export class GestionNoticiasService {
      this.todoFichero = datos;
 
      //actualizamos mediante setObject nuestro objeto en el storage
-     //this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
+     this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
    });
 
      break;
@@ -69,7 +69,7 @@ export class GestionNoticiasService {
      this.todoFichero = datos;
 
      //actualizamos mediante setObject nuestro objeto en el storage
-    // this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
+     this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
    });
 
      break;
@@ -83,7 +83,7 @@ export class GestionNoticiasService {
      this.todoFichero = datos;
 
      //actualizamos mediante setObject nuestro objeto en el storage
-     //this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
+     this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
    });
 
      break;
@@ -96,7 +96,7 @@ datosFichero.subscribe(datos =>{
  this.todoFichero = datos;
 
  //actualizamos mediante setObject nuestro objeto en el storage
- //this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
+ this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
 });
 
 
@@ -115,10 +115,8 @@ datosFichero.subscribe(datos =>{
 
      break
    }
-  
  }
       
-
   //Función getDatosArchivo(). No recibe ninguna variable y devuelve un array de la clase Article
   getDatosArchivo() {
     return this.todoFichero.articles;
