@@ -10,11 +10,11 @@ import { Article } from '../Interfaces/mi-interfaz';
 })
 export class Tab2Page {
 
- 
+  listaNoticias: Article[] = [];
   /* Dentro de nuestro constructor creamos un objeto que será de la clase de nuestro servicio.A su vez,
   crearemos el objeto alerta, que es de tipo AlertController, lo que nos permitirá sacar el recuadro de aviso*/
-  constructor(public gestionDatos : GestionNoticiasService, private alerta :AlertController) {}
-//Método on click . Recibe la variable título del html y llama al método asíncrono presentAlertConfirm
+  constructor(public gestionDatos : GestionNoticiasService) {}
+/*//Método on click . Recibe la variable título del html y llama al método asíncrono presentAlertConfirm
 onClick(articulo : Article){
   this.presentAlertConfirm(articulo);
 }
@@ -45,5 +45,5 @@ async presentAlertConfirm(articulo: Article) {
 
   await alert.present();
 }
-
+*/
 }

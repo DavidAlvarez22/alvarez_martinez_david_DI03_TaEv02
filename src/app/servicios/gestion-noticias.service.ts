@@ -149,6 +149,7 @@ datosFichero.subscribe(datos =>{
     
           //Si no existe en el array, mediante la función push meteremos la noticia
           this.arraySegundaPagina.push(this.todoFichero.articles[indice]);
+          //this.arraySegundaPagina.push(articulo);
 
           //actualizamos mediante setObject nuestro array en el storage
           this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
@@ -157,7 +158,7 @@ datosFichero.subscribe(datos =>{
   }   
   
    // Función borrarArticulo(). Recibe la noticia y no devuelve nada. Sirve para borrar en el array arraySegundaPagina un nuevo artículo   
-   borrarArticulo(articulo: Article){
+   /*borrarArticulo(articulo: Article){
     
     // buscar el artículo
     let articuloEncontrado = this.arraySegundaPagina.find(function(cadaArticulo){return cadaArticulo == articulo});
@@ -180,16 +181,31 @@ datosFichero.subscribe(datos =>{
      
     }
     }
+  }*/
+  borrarArticulo(item: Article) {
+    let indice = this.comprobar(item);
+    if (indice != -1) {
+      this.arraySegundaPagina.splice(indice, 1);
+    }
   }
   // Función comprobar(). Recibe una noticia y devuelve el índice de la misma o -1 en caso de no encontrarla en el array arraySegundaPagina  
   comprobar(articulo: Article){
     
     // buscar el artículo
-    let articuloEncontrado = this.arraySegundaPagina.find(function(cadaArticulo){return cadaArticulo == articulo})!;
+    let articuloEncontrado = this.arraySegundaPagina.find(function(cadaArticulo){return JSON.stringify(cadaArticulo) == JSON.stringify(articulo)})!;
 
     // buscar el índice del articulo por el array
     let indice : number = this.arraySegundaPagina.indexOf(articuloEncontrado);
     
     return indice;
   }
+   /* comprobar(item: Article): number  {
+    let indice: number = this.arraySegundaPagina.findIndex(
+      function(noticia) {
+        return JSON.stringify(noticia) == JSON.stringify(item);
+      }
+    );
+    return indice;
+  }*/
+
 }
