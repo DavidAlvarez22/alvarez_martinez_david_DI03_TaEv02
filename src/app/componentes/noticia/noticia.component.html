@@ -1,16 +1,21 @@
+<!--Creamos con la etiqueta Ion-card nuestro elemento a mostrar en la página y 
+    a través de ngFor crearemos un bucle que recorrerá nuestro array de noticias seleccionadas. 
+    Para obtener el array de noticias seleccionadas, llamaremos a la función getDatosArchivoSegundaPagina de nuestro servicio-->
 <ion-card>
-  <ion-card-header>
+  <ion-card-header><!--Le ponemos un encabezamiento a nuestro elemento ion card-->
     <ion-card-title>{{articulo.title}}</ion-card-title>
     <ion-card-subtitle>{{articulo.source.name}}</ion-card-subtitle>
   </ion-card-header>
   <ion-img *ngIf="articulo.urlToImage" [src]="articulo.urlToImage"></ion-img>
-  <ion-card-content>
+  <ion-card-content><!-- El cuerpo de nuestro elemento ion -card-->
     <p>
       {{articulo.description}}
     </p>
   </ion-card-content>
   <ion-item>
+    <!--Creamos un icono con la etiqueta ion-icon que pondremos los atributos slot, para posición "end" = derecha; name, para el icono
+           y le añadimos el atributo click , que nos indica que al pulsar nos llevará a la función onClick de tab2.page.ts y le mandará la variable título-->
     <ion-icon slot="end" name="trash-outline" (click)="onClick()"></ion-icon>
-    <ion-label><a [href]="articulo.url" target="_blank">Leer</a></ion-label>
+    <ion-label><a [href]="articulo.url" target="_blank">Leer</a></ion-label><!--Mediante href mandaremos a la página web contenida en cada artículo-->
   </ion-item>
 </ion-card>

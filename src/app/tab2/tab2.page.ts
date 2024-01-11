@@ -11,39 +11,6 @@ import { Article } from '../Interfaces/mi-interfaz';
 export class Tab2Page {
 
   listaNoticias: Article[] = [];
-  /* Dentro de nuestro constructor creamos un objeto que será de la clase de nuestro servicio.A su vez,
-  crearemos el objeto alerta, que es de tipo AlertController, lo que nos permitirá sacar el recuadro de aviso*/
+  /* Dentro de nuestro constructor creamos un objeto que será de la clase de nuestro servicio.*/
   constructor(public gestionDatos : GestionNoticiasService) {}
-/*//Método on click . Recibe la variable título del html y llama al método asíncrono presentAlertConfirm
-onClick(articulo : Article){
-  this.presentAlertConfirm(articulo);
-}
-
-// Método asíncrono PresentAlertConfirm. Recibe la variable título. Y si se pulsa el botón ok para confirmar el mensaje, llama al método borrarArticulo de nuestro servicio
-async presentAlertConfirm(articulo: Article) {
-  const alert = await this.alerta.create({
-    cssClass: 'my-custom-class',
-    header: 'Confirmar',
-    message: 'Borrar Noticia!!!',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: (blah) => {
-          console.log('Confirm Cancel: blah');
-        }
-      }, {
-        text: 'Okay',
-        handler: () => {
-         this.gestionDatos.borrarArticulo(articulo);
-          console.log('Confirm Okay');
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-}
-*/
 }

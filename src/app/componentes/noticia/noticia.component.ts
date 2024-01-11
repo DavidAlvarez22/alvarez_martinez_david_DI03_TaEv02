@@ -12,11 +12,14 @@ import { GestionAlmacenamientoService } from 'src/app/servicios/gestion-almacena
 export class NoticiaComponent  implements OnInit {
 
   @Input() articulo: Article = {} as Article;
- 
+
+  /* Dentro de nuestro constructor creamos un objeto que será de la clase de nuestro servicio.A su vez,
+  crearemos el objeto alerta, que es de tipo AlertController, lo que nos permitirá sacar el recuadro de aviso*/
    constructor(private gestionNoticias:GestionNoticiasService,private alerta:AlertController) { }
 
   ngOnInit() {}
 
+  //Método on click . Recibe la variable título del html y llama al método asíncrono confirmarBorrar
   onClick() {
     this.confirmarBorrar();  
   }

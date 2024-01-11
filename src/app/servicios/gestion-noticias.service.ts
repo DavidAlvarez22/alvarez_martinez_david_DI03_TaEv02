@@ -110,7 +110,7 @@ datosFichero.subscribe(datos =>{
      this.todoFichero = datos;
 
      //actualizamos mediante setObject nuestro objeto en el storage
-     //this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
+     this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
    });
 
      break
@@ -157,31 +157,7 @@ datosFichero.subscribe(datos =>{
     }
   }   
   
-   // Función borrarArticulo(). Recibe la noticia y no devuelve nada. Sirve para borrar en el array arraySegundaPagina un nuevo artículo   
-   /*borrarArticulo(articulo: Article){
-    
-    // buscar el artículo
-    let articuloEncontrado = this.arraySegundaPagina.find(function(cadaArticulo){return cadaArticulo == articulo});
-
-    //Estructura condicional que nos controla que artículo encontrado, no sea undefined.
-    if(articuloEncontrado){
-
-    // buscar el índice del articulo por el array
-    let indice : number = this.arraySegundaPagina.indexOf(articuloEncontrado);
-
-    //Estructura condicional que nos permitirá borrar solo aquellas noticias que estén en el array.
-    //Si diera -1, es decir, que la noticia no existe, no haría nada. Evitamos poner -1, ya que si pasamos ese índice, al ser 
-    //negativo empezaría a contar desde el final del array y borraría el de esa posición.
-    if (indice != -1){
-      //Borra el artículo con la función splice
-      this.arraySegundaPagina.splice(indice,1);
-
-      //actualizamos mediante setObject nuestro array en el storage
-      this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
-     
-    }
-    }
-  }*/
+  // Función borrarArticulo(). Recibe la noticia y no devuelve nada. Sirve para borrar en el array arraySegundaPagina un nuevo artículo
   borrarArticulo(item: Article) {
     let indice = this.comprobar(item);
     if (indice != -1) {
@@ -199,13 +175,5 @@ datosFichero.subscribe(datos =>{
     
     return indice;
   }
-   /* comprobar(item: Article): number  {
-    let indice: number = this.arraySegundaPagina.findIndex(
-      function(noticia) {
-        return JSON.stringify(noticia) == JSON.stringify(item);
-      }
-    );
-    return indice;
-  }*/
-
+   
 }
