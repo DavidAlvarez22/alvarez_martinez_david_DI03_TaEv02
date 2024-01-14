@@ -20,6 +20,8 @@ export class GestionNoticiasService {
   private arraySegundaPagina : Article[] = [];
 
   private tipoArticulo: any = "GENERAL";
+
+  private rest !: string;
   
   //Dentro del constructor introduciremos el objeto leerfichero que será de la clase HttpClient. Esto nos permitirá leer el archivo json.
   //Declaramos también nuestro servicio de almacenamiento
@@ -41,69 +43,44 @@ export class GestionNoticiasService {
 
    // Método getLeerFichero().Recibe el tipo de artículo y en función del mismo llama a un listado u otro. 
   getLeerFichero(tipoArticulo : any){
-   
-    //Definimos el objeto datosFichero que será un objeto de Observable de la clase RootObject
-   let datosFichero: Observable<RootObject>;
+
    switch (tipoArticulo){
-     case "GENERAL" : 
-      
-   //Nuestro objeto utilizará la función get de la clase httpClient que hemos definido en el constructor, para lo cual le debemos pasar la url del archivo a leer
-   datosFichero =this.leerFichero.get<RootObject>("https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=3bda5b65e443446a8cbbd3d7c1144e22");
-
-   //Finalmente mediante una función arrow, los datos del objeto datosFichero los introduciremos en nuestro objeto todoFichero que hemos creado al inicio
-   datosFichero.subscribe(datos =>{
-     this.todoFichero = datos;
-
-     //actualizamos mediante setObject nuestro objeto en el storage
-     this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
-   });
-
+    
+    case "GENERAL" : 
+      this.rest = "https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=3bda5b65e443446a8cbbd3d7c1144e22";
+      this.eleccion(this.rest);    
+   
      break;
      case "BUSINESS" : 
+
+      this.rest = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=3bda5b65e443446a8cbbd3d7c1144e22";
+      this.eleccion(this.rest);   
          
-   //Nuestro objeto utilizará la función get de la clase httpClient que hemos definido en el constructor, para lo cual le debemos pasar la url del archivo a leer
-   datosFichero =this.leerFichero.get<RootObject>("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=3bda5b65e443446a8cbbd3d7c1144e22");
-
-   //Finalmente mediante una función arrow, los datos del objeto datosFichero los introduciremos en nuestro objeto todoFichero que hemos creado al inicio
-   datosFichero.subscribe(datos =>{
-     this.todoFichero = datos;
-
-     //actualizamos mediante setObject nuestro objeto en el storage
-     this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
-   });
-
      break;
      case "TECHNOLOGY" : 
 
-     //Nuestro objeto utilizará la función get de la clase httpClient que hemos definido en el constructor, para lo cual le debemos pasar la url del archivo a leer
-   datosFichero =this.leerFichero.get<RootObject>("https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=3bda5b65e443446a8cbbd3d7c1144e22");
-
-   //Finalmente mediante una función arrow, los datos del objeto datosFichero los introduciremos en nuestro objeto todoFichero que hemos creado al inicio
-   datosFichero.subscribe(datos =>{
-     this.todoFichero = datos;
-
-     //actualizamos mediante setObject nuestro objeto en el storage
-     this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
-   });
+      this.rest = "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=3bda5b65e443446a8cbbd3d7c1144e22";
+      this.eleccion(this.rest);
 
      break;
      case "SCIENCE" : 
-//Nuestro objeto utilizará la función get de la clase httpClient que hemos definido en el constructor, para lo cual le debemos pasar la url del archivo a leer
-datosFichero =this.leerFichero.get<RootObject>("https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=3bda5b65e443446a8cbbd3d7c1144e22");
 
-//Finalmente mediante una función arrow, los datos del objeto datosFichero los introduciremos en nuestro objeto todoFichero que hemos creado al inicio
-datosFichero.subscribe(datos =>{
- this.todoFichero = datos;
-
- //actualizamos mediante setObject nuestro objeto en el storage
- this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
-});
-
+      this.rest = "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=3bda5b65e443446a8cbbd3d7c1144e22";
+      this.eleccion(this.rest);
 
      break;
      case "SPORTS" : 
-     //Nuestro objeto utilizará la función get de la clase httpClient que hemos definido en el constructor, para lo cual le debemos pasar la url del archivo a leer
-   datosFichero =this.leerFichero.get<RootObject>("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=3bda5b65e443446a8cbbd3d7c1144e22");
+
+      this.rest = "https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=3bda5b65e443446a8cbbd3d7c1144e22";
+      this.eleccion(this.rest);
+      break;
+   }
+
+ }
+  eleccion (rest : string){
+
+    //Nuestro objeto utilizará la función get de la clase httpClient que hemos definido en el constructor, para lo cual le debemos pasar la url del archivo a leer
+    let datosFichero: Observable<RootObject> =this.leerFichero.get<RootObject>(rest);
 
    //Finalmente mediante una función arrow, los datos del objeto datosFichero los introduciremos en nuestro objeto todoFichero que hemos creado al inicio
    datosFichero.subscribe(datos =>{
@@ -112,10 +89,7 @@ datosFichero.subscribe(datos =>{
      //actualizamos mediante setObject nuestro objeto en el storage
      this.gestionAlmacen.setObject("todoFichero", this.todoFichero);
    });
-
-     break
-   }
- }
+  }
       
   //Función getDatosArchivo(). No recibe ninguna variable y devuelve un array de la clase Article
   getDatosArchivo() {
@@ -149,7 +123,8 @@ datosFichero.subscribe(datos =>{
     
           //Si no existe en el array, mediante la función push meteremos la noticia
           this.arraySegundaPagina.push(this.todoFichero.articles[indice]);
-          //this.arraySegundaPagina.push(articulo);
+          //Alternativamente se puede usar este código.
+          //this.arraySegundaPagina.push(articulo); 
 
           //actualizamos mediante setObject nuestro array en el storage
           this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
@@ -162,6 +137,7 @@ datosFichero.subscribe(datos =>{
     let indice = this.comprobar(item);
     if (indice != -1) {
       this.arraySegundaPagina.splice(indice, 1);
+      this.gestionAlmacen.setObject("arraySegundaPagina", this.arraySegundaPagina);
     }
   }
   // Función comprobar(). Recibe una noticia y devuelve el índice de la misma o -1 en caso de no encontrarla en el array arraySegundaPagina  
